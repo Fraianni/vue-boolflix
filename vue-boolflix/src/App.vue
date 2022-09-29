@@ -44,6 +44,23 @@
           this.errorMessage = 'error: ' + error.message;
         });
 
+        axios
+        .get(`https://api.themoviedb.org/3/search/tv?api_key=6f73513ffdc9100a85f2ea1e0bc11fd3&query=${text_to_search}&language=it-IT`)
+        .then(({ status, data }) => {
+          this.loading = false;
+          if (status === 200) {
+            this.series = data.results;
+             console.log('serie',this.series)
+          } else {
+            this.errorMessage = 'something went wrong...';
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.loading = false;
+          this.errorMessage = 'error: ' + error.message;
+        });
+
       }
     },
 
@@ -52,6 +69,8 @@
         apiUrl: '',
         loading:false,
         films:[],
+        series:[],
+
         errorMessage:'',
         text_to_search:'',
         
