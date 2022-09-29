@@ -2,8 +2,7 @@
   <div id="app">
     <headerComponent @search_this_text="filter_films" />
     <loaderComponent v-if="loading" />
-    <mainComponent v-else />
-
+    <mainComponent :films="films" />
   </div>
 </template>
 
@@ -26,14 +25,15 @@
       filter_films(text_to_search){
       
         console.log(text_to_search);
+        this.loading=true;
            
         axios
-        .get(`https://api.themoviedb.org/3/search/movie?api_key=6f73513ffdc9100a85f2ea1e0bc11fd3&query= ${text_to_search}`)
+        .get(`https://api.themoviedb.org/3/search/movie?api_key=6f73513ffdc9100a85f2ea1e0bc11fd3&query=${text_to_search}&language=it-IT`)
         .then(({ status, data }) => {
           this.loading = false;
           if (status === 200) {
             this.films = data.results;
-            console.log(data.results)
+            // console.log(this.films.results.title)
           } else {
             this.errorMessage = 'something went wrong...';
           }
@@ -50,7 +50,7 @@
     data() {
       return{
         apiUrl: '',
-        loading:true,
+        loading:false,
         films:[],
         errorMessage:'',
         text_to_search:'',
