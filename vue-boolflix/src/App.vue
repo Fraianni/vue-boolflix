@@ -2,7 +2,7 @@
   <div id="app">
     <headerComponent @search_this_text="filter_films" />
     <loaderComponent v-if="loading" />
-    <mainComponent :films="films" />
+    <mainComponent :films="films" :series="series" />
   </div>
 </template>
 
