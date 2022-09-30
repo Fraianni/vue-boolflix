@@ -7,7 +7,8 @@
         <p>Title: {{film.title}}</p>
         <p>Original title: {{film.original_title}}</p>
         <p>Original language: <img class="flag" :src="getFlag(film.original_language)" :alt="film.original_language"></p>
-        <p>Vote: {{film.vote_average}}</p>
+        <p>Vote: {{voteToStars(film.vote_average)}}</p>
+        <img :src="getPoster(film.poster_path)" alt="">
     </div>
     </div>
 
@@ -46,23 +47,44 @@ export default {
             return `https://flagicons.lipis.dev/flags/1x1/${country}.svg`
             
         },
+
+        getPoster(poster_path){
+            return `http://image.tmdb.org/t/p/w185/${poster_path}`
+        },
+
+        voteToStars(vote_average){
+            const star_number = Math.ceil(vote_average/2);
+            console.log(vote_average,star_number);
+            return star_number;
+        }
     }
 }
 </script>
 
 <style scoped lang="scss">
-    .films{
+    main{
+        h1{
+             text-align: center;
+
+        }
+
+        .films{
         display: flex;
         flex-wrap: wrap;
         .film-card{
-        border: 1px black solid;
-        width: calc(100% / 4);
-        display: inline-block;
-         .flag{
-            width: 20px;
+            border: 1px black solid;
+            width: calc(100% / 4);
+            display: inline-block;
+            background-color:lightblue;
+            color: white;
+        
+            .flag{
+                width: 20px;
             }
         }
     }
+    }
+ 
    
   
 
