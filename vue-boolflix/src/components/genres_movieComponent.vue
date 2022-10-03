@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="genres">
     <p v-for="genre in this.genres_movie" :key="genre.id">
         {{genre.name}}
     </p>
@@ -29,6 +29,10 @@ export default {
       }
     },
 
+    props:{
+        films:Array
+    },
+
 
     created() {
       axios
@@ -36,7 +40,7 @@ export default {
         .then(({ status, data }) => {
           this.loading = false;
           if (status === 200) {
-            this.genres_movie = data;
+            this.genres_movie = data.genres;
              console.log('generi',this.genres_movie)
           } else {
             this.errorMessage = 'something went wrong...';
@@ -55,6 +59,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+    .genres{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        >*{
+            margin: 10px;
+        }
+    }
 
 </style>

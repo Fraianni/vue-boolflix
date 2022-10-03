@@ -4,7 +4,7 @@
 
     <div class="films">
 
-        <genres_movieComponent  />
+        <genres_movieComponent :films="films"  />
 
 
         <div class="card" v-for="film in films " :key="film.id">
@@ -162,7 +162,7 @@
         
         .overview{
                 max-height: 100px;
-                font-size: 0.7rem;
+                font-size: 0.6rem;
             }
     }
  
