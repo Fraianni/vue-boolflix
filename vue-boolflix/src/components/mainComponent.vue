@@ -3,38 +3,59 @@
     <h1>FILM</h1>
 
     <div class="films">
-        <div class="film-card" v-for="film in films " :key="film.id">
-        <p>Title: {{film.title}}</p>
-        <p>Original title: {{film.original_title}}</p>
-        <p>Original language: <img class="flag" :src="getFlag(film.original_language)" :alt="film.original_language"></p>
-        <p>Vote:
-            <span v-for="counter in 5" :key="counter">
-                <font-awesome-icon v-if="counter <= voteToStars(film.vote_average) " icon="fa-solid fa-star" />
-                <font-awesome-icon v-else icon="fa-regular fa-star" />
+        <div class="card" v-for="film in films " :key="film.id">
+             <div class="img-card">
+                <img :src="getPoster(film.poster_path)" alt="">
+            </div>
+          
+            <div class="info-card">
+                <p>Title: {{film.title}}</p>
+                <p>Original title: {{film.original_title}}</p>
+                <p>Original language: <img class="flag" :src="getFlag(film.original_language)" :alt="film.original_language"></p>
+                <p>Vote:
+                    <span v-for="counter in 5" :key="counter">
+                        <font-awesome-icon v-if="counter <= voteToStars(film.vote_average) " icon="fa-solid fa-star" />
+                        <font-awesome-icon v-else icon="fa-regular fa-star" />
 
-            </span>
-        </p>
-        <img :src="getPoster(film.poster_path)" alt="">
-    </div>
+                    </span>
+                </p>
+                <p class="overview">Overview: {{film.overview}}</p>
+            </div>
+            
+           
+        </div>
+
+        
     </div>
 
     <h1>SERIE</h1>
 
+
     <div class="films">
-        <div class="film-card" v-for="tv in series " :key="tv.id">
-        <p>Title: {{tv.name}}</p>
-        <p>Original title: {{tv.original_name}}</p>
-        <p>Original language: <img class="flag" :src="getFlag(tv.original_language)" :alt="tv.original_language"></p>
-        <p>Vote: 
-            <span v-for="counter in 5" :key="counter">
-                <font-awesome-icon v-if="counter <= voteToStars(tv.vote_average) " icon="fa-solid fa-star" />
-                <font-awesome-icon v-else icon="fa-regular fa-star" />
+        <div class="card" v-for="tv in series " :key="tv.id">
+             <div class="img-card">
+                <img :src="getPoster(tv.poster_path)" alt="">
+            </div>
+          
+            <div class="info-card">
+                <p>Title: {{tv.name}}</p>
+                <p>Original title: {{tv.original_name}}</p>
+                <p>Original language: <img class="flag" :src="getFlag(tv.original_language)" :alt="tv.original_language"></p>
+                <p>Vote:
+                    <span v-for="counter in 5" :key="counter">
+                        <font-awesome-icon v-if="counter <= voteToStars(tv.vote_average) " icon="fa-solid fa-star" />
+                        <font-awesome-icon v-else icon="fa-regular fa-star" />
 
-            </span>
-        </p>
-        <img :src="getPoster(tv.poster_path)" alt="">
+                    </span>
+                </p>
+                <p class="overview">Overview: {{tv.overview}}</p>
 
-    </div>
+            </div>
+            
+           
+        </div>
+
+        
     </div>
 
   </main>
@@ -63,7 +84,7 @@ export default {
         },
 
         getPoster(poster_path){
-            return `http://image.tmdb.org/t/p/w185/${poster_path}`
+            return `http://image.tmdb.org/t/p/w342/${poster_path}`
         },
 
         voteToStars(vote_average){
@@ -79,26 +100,60 @@ export default {
 
 <style scoped lang="scss">
     main{
+        padding-top: 150px;
+
         h1{
              text-align: center;
 
         }
 
         .films{
-        display: flex;
-        flex-wrap: wrap;
-        .film-card{
-            border: 1px black solid;
-            width: calc(100% / 4);
-            display: inline-block;
-            background-color:lightblue;
-            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            .card{
+                margin: 10px;
+                width: calc(100% / 5);
+                display: inline-block;
+                background-color:black;
+                color: white;
+                position: relative;
+                height:400px;
+                
         
-            .flag{
-                width: 20px;
+                .flag{
+                    width: 20px;
+                }
+                
+                .info-card{
+                    width: 100%;
+                    font-size: 0.8rem;
+                }
+
+                .img-card{
+                    width: 100%;
+
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    img{
+                        height: 400px;
+                        width: 100%;
+                    }
+                    
+                }
             }
+
+            .img-card:hover{
+                opacity: 0.1;
+            }
+
         }
-    }
+        
+        .overview{
+                max-height: 100px;
+                font-size: 0.7rem;
+            }
     }
  
    
