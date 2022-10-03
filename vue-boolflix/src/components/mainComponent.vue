@@ -8,8 +8,10 @@
         <p>Original title: {{film.original_title}}</p>
         <p>Original language: <img class="flag" :src="getFlag(film.original_language)" :alt="film.original_language"></p>
         <p>Vote:
-            <span v-for="counter in voteToStars(film.vote_average) " :key="counter">
-                <i class="fa-solid fa-star"></i>
+            <span v-for="counter in 5" :key="counter">
+                <font-awesome-icon v-if="counter <= voteToStars(film.vote_average) " icon="fa-solid fa-star" />
+                <font-awesome-icon v-else icon="fa-regular fa-star" />
+
             </span>
         </p>
         <img :src="getPoster(film.poster_path)" alt="">
@@ -23,7 +25,13 @@
         <p>Title: {{tv.name}}</p>
         <p>Original title: {{tv.original_name}}</p>
         <p>Original language: <img class="flag" :src="getFlag(tv.original_language)" :alt="tv.original_language"></p>
-        <p>Vote:{{voteToStars(tv.vote_average)}}</p>
+        <p>Vote: 
+            <span v-for="counter in 5" :key="counter">
+                <font-awesome-icon v-if="counter <= voteToStars(tv.vote_average) " icon="fa-solid fa-star" />
+                <font-awesome-icon v-else icon="fa-regular fa-star" />
+
+            </span>
+        </p>
         <img :src="getPoster(tv.poster_path)" alt="">
 
     </div>
