@@ -3,6 +3,10 @@
     <h1>FILM</h1>
 
     <div class="films">
+
+        <genres_movieComponent  />
+
+
         <div class="card" v-for="film in films " :key="film.id">
              <div class="img-card">
                 <img :src="getPoster(film.poster_path)" alt="">
@@ -62,40 +66,46 @@
 </template>
 
 <script>
-export default {
-    name:'mainComponent',
 
-    props:{
-        films:Array,
-        series:Array
-    },
+    import genres_movieComponent from './genres_movieComponent.vue';
 
-    methods:{
-        getFlag(country){
-                if(country==='en'){
-                    country='gb';
-                }
-                else if(country==='ja'){
-                    country='jp';
-                }
+    export default {
+        name:'mainComponent',
 
-            return `https://flagicons.lipis.dev/flags/1x1/${country}.svg`
-            
+        components: {
+            genres_movieComponent,
         },
 
-        getPoster(poster_path){
-            return `http://image.tmdb.org/t/p/w342/${poster_path}`
+        props:{
+            films:Array,
+            series:Array
         },
 
-        voteToStars(vote_average){
-            const star_number = Math.ceil(vote_average/2);
-            console.log(vote_average,star_number);
-            if(star_number===0)
-                return 'n/d';
-            return star_number;
+        methods:{
+            getFlag(country){
+                    if(country==='en'){
+                        country='gb';
+                    }
+                    else if(country==='ja'){
+                        country='jp';
+                    }
+
+                return `https://flagicons.lipis.dev/flags/1x1/${country}.svg`
+                
+            },
+
+            getPoster(poster_path){
+                return `http://image.tmdb.org/t/p/w342/${poster_path}`
+            },
+
+            voteToStars(vote_average){
+                const star_number = Math.ceil(vote_average/2);
+                if(star_number===0)
+                    return 'n/d';
+                return star_number;
+            }
         }
     }
-}
 </script>
 
 <style scoped lang="scss">

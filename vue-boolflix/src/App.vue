@@ -61,7 +61,9 @@
           this.errorMessage = 'error: ' + error.message;
         });
 
-      }
+      },
+
+  
     },
 
     data() {
@@ -70,6 +72,7 @@
         loading:false,
         films:[],
         series:[],
+        genres_movie:[],
 
         errorMessage:'',
         text_to_search:'',
@@ -80,6 +83,7 @@
     },
 
     mounted() {
+
    
     },
   }
