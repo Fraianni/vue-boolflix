@@ -2,7 +2,6 @@
   <div>
     <p v-for="genre in this.genres_movie" :key="genre.id">
         {{genre.name}}
-        ciao fra
     </p>
   </div>
 </template>
