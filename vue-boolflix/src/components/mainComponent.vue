@@ -7,7 +7,11 @@
         <p>Title: {{film.title}}</p>
         <p>Original title: {{film.original_title}}</p>
         <p>Original language: <img class="flag" :src="getFlag(film.original_language)" :alt="film.original_language"></p>
-        <p>Vote: {{voteToStars(film.vote_average)}}</p>
+        <p>Vote:
+            <span v-for="counter in voteToStars(film.vote_average) " :key="counter">
+                <i class="fa-solid fa-star"></i>
+            </span>
+        </p>
         <img :src="getPoster(film.poster_path)" alt="">
     </div>
     </div>
@@ -19,7 +23,9 @@
         <p>Title: {{tv.name}}</p>
         <p>Original title: {{tv.original_name}}</p>
         <p>Original language: <img class="flag" :src="getFlag(tv.original_language)" :alt="tv.original_language"></p>
-        <p>Vote: {{tv.vote_average}}</p>
+        <p>Vote:{{voteToStars(tv.vote_average)}}</p>
+        <img :src="getPoster(tv.poster_path)" alt="">
+
     </div>
     </div>
 
@@ -55,6 +61,8 @@ export default {
         voteToStars(vote_average){
             const star_number = Math.ceil(vote_average/2);
             console.log(vote_average,star_number);
+            if(star_number===0)
+                return 'n/d';
             return star_number;
         }
     }
